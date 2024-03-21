@@ -1,22 +1,29 @@
 package com.address.model;
 
 public class Utilisateur {
-    /*--------------------------------------------------
-                    mODEL
-     */
-
-
-
+    /*-------------------------------------------
+                    Attributs
+    -------------------------------------------*/
     private int id;
     private String name;
-    private String firstaname;
+    private String firstname;
     private String email;
     private String password;
 
-    /*--------------------------------------------------
-                Constructeur
-     */
+    /*-------------------------------------------
+                    Constructeurs
+    -------------------------------------------*/
     public Utilisateur(){}
+    public Utilisateur(String name, String firstname, String email, String password) {
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
+        this.password = password;
+    }
+
+    /*-------------------------------------------
+                    Getters et Setters
+    -------------------------------------------*/
 
     public int getId() {
         return id;
@@ -34,12 +41,12 @@ public class Utilisateur {
         this.name = name;
     }
 
-    public String getFirstaname() {
-        return firstaname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstaname(String firstaname) {
-        this.firstaname = firstaname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getEmail() {
@@ -57,20 +64,15 @@ public class Utilisateur {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Utilisateur(String name, String firstaname, String email, String password){
-        this.name = name;
-        this.firstaname =firstaname;
-        this.email =email;
-        this.password =password;
-
-    }
+    /*-------------------------------------------
+                    Méthodes
+    -------------------------------------------*/
 
     @Override
     public String toString() {
         return "Utilisateur{" +
-                ", name='" + name + '\'' +
-                ", firstaname='" + firstaname + '\'' +
+                "name='" + name + '\'' +
+                ", firstname='" + firstname + '\'' +
                 '}';
     }
 }
