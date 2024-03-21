@@ -3,6 +3,7 @@ package com.address.model;
 import java.sql.*;
 public class ManagerUtilisateur {
     private static final Connection connexion = Database.getConnexion();
+
     public static Utilisateur create(Utilisateur user) throws SQLException {
         //créer un objet Utilisateur
         Utilisateur userAdd = new Utilisateur();
@@ -21,7 +22,7 @@ public class ManagerUtilisateur {
             //exécuter la requête
             int row = preparedStatement.executeUpdate();
             //tester si la requête à réussi
-            if(row > 0) {
+            if (row > 0) {
                 userAdd.setName(user.getName());
                 userAdd.setFirstname(user.getFirstname());
                 userAdd.setEmail(user.getEmail());
@@ -30,14 +31,14 @@ public class ManagerUtilisateur {
             //recupérer l'enregistrement
         }
         //lever l'erreur SQL
-        catch (SQLException e){
+        catch (SQLException e) {
             e.printStackTrace();
         }
         //retourne un objet utilisateur complet
         return userAdd;
     }
 
-    public static Utilisateur findByMail(Utilisateur user) throws SQLException{
+    public static Utilisateur findByMail(Utilisateur user) throws SQLException {
         Utilisateur userRecup = new Utilisateur();
         try {
             //connexion à la bdd
@@ -52,7 +53,7 @@ public class ManagerUtilisateur {
             ResultSet reponse = preparedStatement.executeQuery();
             //boucle pour parcourir le résultat
             while (reponse.next()) {
-                if(reponse.getString(1) !=null){
+                if (reponse.getString(1) != null) {
                     //setter les nouvelles valeurs
                     userRecup.setId(reponse.getInt(1));
                     userRecup.setName(reponse.getString("name"));
@@ -67,42 +68,43 @@ public class ManagerUtilisateur {
         //retourne l'objet Utilisateur
         return userRecup;
     }
+
     public static Utilisateur update(Utilisateur utilisateur) {
         Utilisateur Userupdate = new Utilisateur();
         // Mettre à jour le nom et le prénom de l'utilisateur
 
         try {
 
-        Statement smt = connexion.createStatement();
-        //requête
-        String req = "UPDATE users set name=?, firstname=?  WHERE email = ?";
-        //préparer la requête
-        PreparedStatement preparedStatement = connexion.prepareStatement(req);
+            Statement smt = connexion.createStatement();
+            //requête
+            String req = "UPDATE users set name=?, firstname=?  WHERE email = ?";
+            //préparer la requête
+            PreparedStatement preparedStatement = connexion.prepareStatement(req);
 //        ResultSet reponse = preparedStatement.executeQuery();
 
-        //binder les paramètres
+            //binder les paramètres
 
-        preparedStatement.setString(1, utilisateur.getName());
-        preparedStatement.setString(2, utilisateur.getFirstname());
-        preparedStatement.setString(3, utilisateur.getEmail());
-        //boucle pour parcourir le résultat
-        int row = preparedStatement.executeUpdate();
-        //tester si la requête à réussi
-        if(row > 0) {
-            Userupdate.setName(utilisateur.getName());
-            Userupdate.setFirstname(utilisateur.getFirstname());
+            preparedStatement.setString(1, utilisateur.getName());
+            preparedStatement.setString(2, utilisateur.getFirstname());
+            preparedStatement.setString(3, utilisateur.getEmail());
+            //boucle pour parcourir le résultat
+            int row = preparedStatement.executeUpdate();
+            //tester si la requête à réussi
+            if (row > 0) {
+                Userupdate.setName(utilisateur.getName());
+                Userupdate.setFirstname(utilisateur.getFirstname());
 
-        //recupérer l'enregistrement
-    }
+                //recupérer l'enregistrement
+            }
         }
-    //lever l'erreur SQL
-        catch (SQLException e){
-        e.printStackTrace();
-    }
-    //retourne un objet utilisateur complet
+        //lever l'erreur SQL
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //retourne un objet utilisateur complet
         return Userupdate;
 
-
     }
+
 
 }
